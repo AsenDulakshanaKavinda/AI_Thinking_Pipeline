@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package test;
+
+option go_package = "gateway_service/generated/v1/go/";
+
+message Timestamp {
+  int64 unix_ms = 1;
+}
+
+message RequestMeta {
+  string request_id = 1;
+  Timestamp time = 2;
+}
+
+message ClientRequestToGateway {
+  RequestMeta meta = 1;
+  string user_prompt = 2;
+}
+
+message GatewayResponseToClient {
+  RequestMeta meta = 1;
+  string message = 2;
+}
+
+service GatewayService {
+  rpc HandleRequest (ClientRequestToGateway) returns (GatewayResponseToClient);
+}
