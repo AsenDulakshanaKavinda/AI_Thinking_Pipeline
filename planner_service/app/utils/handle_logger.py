@@ -6,7 +6,7 @@ from logging.handlers import RotatingFileHandler
 
 LOG_NAME = "Planner-Service"
 LOG_DIR = "logs"
-LOG_FILENAME = "logs.log"
+LOG_FILENAME = f"{LOG_DIR}/logs.log"
 
 
 def get_logger(name: str = LOG_NAME):
