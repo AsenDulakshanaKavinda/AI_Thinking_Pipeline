@@ -1,3 +1,3 @@
-from .client import llm
+from .client import llm, llm_intent, llm_planner
 
-__all__ = ["llm"]
+__all__ = ["llm", "llm_intent", "llm_planner"]

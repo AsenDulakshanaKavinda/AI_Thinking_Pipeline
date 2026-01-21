@@ -8,8 +8,11 @@ Rules:
 - Do NOT explain your reasoning.
 - Do NOT add extra text.
 - If the intent is unclear, return "unknown".
+- For Confidence compare the intent and the user input and 
+  give a confidence score showing how confidence you are about that answer.
 
 Allowed intents:
+- Character design
 - information_request
 - task_execution
 - code_generation
@@ -20,9 +23,9 @@ Allowed intents:
 - unknown
 
 User input:
-{{user_input}}
+{{user_prompt}}
 
-Respond in the following JSON format ONLY:
+Respond in the following format ONLY:
 {
   "intent": "<intent_name>",
   "confidence": <number between 0 and 1>

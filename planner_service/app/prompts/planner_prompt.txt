@@ -16,9 +16,9 @@ User intent:
 {{intent}}
 
 User input:
-{{user_input}}
+{{user_prompt}}
 
-Respond in the following JSON format ONLY:
+Respond in the following format ONLY:
 {
   "plan": [
     "<step 1>",
