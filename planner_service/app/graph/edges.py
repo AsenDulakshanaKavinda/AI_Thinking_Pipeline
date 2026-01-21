@@ -10,6 +10,13 @@ def route_after_intent(state: PlannerState) -> Literal["intent", "planner"]:
     """
     try:
         confidence = state.get("intent_confidence", 0.0)
+        if not confidence:
+            PlannerException(
+                "confidence is missing or empty",
+                context={
+                    "operation": "Planner Node"
+                }
+            )
         if confidence > 0.75:
             log.info("Intent confidence positive going to planner")
             return "planner"
