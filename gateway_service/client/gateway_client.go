@@ -16,12 +16,12 @@ It is meant to be invoked by the main application entry point.
 
 
 import (
-	"log"
 
 	"github.com/ai-thinking-pipeline/handlers"	
+	zlog "github.com/ai-thinking-pipeline/utils/zlog"
 )
 
 func GatewayClient() {
-	log.Println("[Gateway Client] - Sending the Client Request.")
+	zlog.Info("[Gateway Client] - Sending the Client Request.")
 	handlers.ClientRequestToGatewayFn()
 }

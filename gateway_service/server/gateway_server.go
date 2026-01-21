@@ -17,9 +17,9 @@ if the application needs to perform additional tasks (e.g., client calls).
 
 
 import (
-	"log"
 	"net"
 
+	zlog "github.com/ai-thinking-pipeline/utils/zlog"
 	pb "github.com/ai-thinking-pipeline/generated/v1/go"
 	"github.com/ai-thinking-pipeline/handlers"	
 	"google.golang.org/grpc"
@@ -28,13 +28,13 @@ import (
 func Server() {
 	lis, err := net.Listen("tcp", ":50050")
 	if err != nil {
-		log.Println(err)
+		zlog.Error(err.Error())
 	}
 
 	gatewayServer := grpc.NewServer()
 	pb.RegisterGatewayServiceServer(gatewayServer, &handlers.GatewayService{})
 
-	log.Println("[Gateway Server] - Running on :50050")
+	zlog.Info("[Gateway Server] - Running on :50050")
 	gatewayServer.Serve(lis)
 
 }
