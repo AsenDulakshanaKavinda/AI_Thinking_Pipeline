@@ -1,5 +1,14 @@
 package zlog
 
+/* 
+Package zlog provides a simple, safe-to-use logging wrapper.
+
+Responsibilities:
+- It ensures the underlying logger is initialized only once
+- and exposes convenient helper functions for common log levels.
+
+*/
+
 import (
 	"sync"
 

@@ -1,5 +1,17 @@
 package logger
 
+/* 
+Package logger implements the logger utils service for the GatewayService.
+
+This file defines:
+- The InitLogger function
+
+Responsibilities:
+- Create InitLogger function with both console and file loggers.
+- Apply messageCfg(log message format) to improve readability.
+
+*/
+
 import (
 	"os"
 
