@@ -22,6 +22,7 @@ import (
 	"time"
 
 	pb "github.com/ai-thinking-pipeline/generated/v1/go"
+	zlog "github.com/ai-thinking-pipeline/utils/zlog"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -33,7 +34,7 @@ func ClientRequestToGatewayFn() {
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
 	if err != nil {
-		log.Println(err)
+		zlog.Error(err.Error())
 	}
 	defer conn.Close()
 
@@ -52,10 +53,10 @@ func ClientRequestToGatewayFn() {
 		},
 	)
 	if err != nil {
-		log.Println(err)
+		zlog.Error(err.Error())
 	}
 
-	log.Println("Response:", resp.Message)
+	log.Println("- Response:- ", resp.Message)
 
 }
 

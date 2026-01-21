@@ -3,35 +3,51 @@ package logger
 import (
 	"os"
 
-	"github.com/sirupsen/logrus"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
-var Log *logrus.Logger
+var Log = zap.NewNop()
 
-func InitLogger(logDir, logFile string) {
-    Log = logrus.New()
+func InitLogger(logDir, logFile string) error {
+    if err := os.MkdirAll(logDir, 0755); err != nil {
+        return err
+    }
 
-    // 1. Console
-    Log.SetOutput(os.Stdout)
-    Log.SetFormatter(&logrus.TextFormatter{
-        FullTimestamp: true,
+    fileWriter := zapcore.AddSync(&lumberjack.Logger{
+		Filename:   logDir + "/" + logFile,
+		MaxSize:   5, // MB
+		MaxBackups: 3,
+		MaxAge:    28,
+		Compress:  true, 
     })
 
-    // 2. Rotating file
-    lumberjackLogger := &lumberjack.Logger{
-        Filename:   logDir + "/" + logFile,
-        MaxSize:    5,  // MB
-        MaxBackups: 3,
-        MaxAge:     28, // days
-        Compress:   true,
-    }   
+	messageCfg := zapcore.EncoderConfig{
+		TimeKey:      "time",
+		LevelKey:     "level",
+		NameKey:      "logger",
+		MessageKey:   "msg",
+		CallerKey:    "", // remove caller
+		LineEnding:   zapcore.DefaultLineEnding,
+		EncodeTime:   zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05"),
+		EncodeLevel:  zapcore.CapitalLevelEncoder,
+		EncodeName:   zapcore.FullNameEncoder,
+	}
 
-    // Multi-output (console + file)
-    Log.SetOutput(lumberjackLogger)
-    Log.SetLevel(logrus.InfoLevel)
+    consoleEncoder := zapcore.NewConsoleEncoder(messageCfg)
+    fileEncoder := zapcore.NewJSONEncoder(messageCfg)
 
+    core := zapcore.NewTee(
+        zapcore.NewCore(consoleEncoder, zapcore.AddSync(os.Stdout), zap.InfoLevel),
+        zapcore.NewCore(fileEncoder, fileWriter, zap.InfoLevel),
+    )
+
+    Log = zap.New(core).Named("gateway")
+	return nil
 }
+
+
 
 
 

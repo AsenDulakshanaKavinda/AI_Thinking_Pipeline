@@ -17,15 +17,17 @@ local development and learning.
 
 
 import (
-	"log"
 	"time"
 
 	"github.com/ai-thinking-pipeline/client"
 	"github.com/ai-thinking-pipeline/server"
+	zlog "github.com/ai-thinking-pipeline/utils/zlog"
+
 )
 
 func main() {
-	log.Println("Starting Gateway Service")
+	// log.Println("Starting Gateway Service")
+	zlog.Info("Gateway Server stating...")
 
 	// start server in background
 	go server.Server()
@@ -36,7 +38,7 @@ func main() {
 	// send request
 	client.GatewayClient()
 
-	// 
+	// keep server running
 	select {}
 
 }
