@@ -22,10 +22,9 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-import thinking_pipeline_pb2 as thinking__pipeline__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rplanner.proto\x12\nplanner.v2\x1a\x17thinking_pipeline.proto\"9\n\x0ePlannerRequest\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\"\x87\x01\n\x0fPlannerResponse\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\x12\x0e\n\x06intent\x18\x03 \x01(\t\x12\x12\n\nconfidence\x18\x04 \x01(\x02\x12\'\n\x04plan\x18\x05 \x01(\x0b\x32\x19.thinkingpipeline.v2.Plan2P\n\x07Planner\x12\x45\n\nCreatePlan\x12\x1a.planner.v2.PlannerRequest\x1a\x1b.planner.v2.PlannerResponseB$Z\"gateway_service/generated/v2/go;pbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rplanner.proto\x12\nplanner.v2\"\x1c\n\tTimestamp\x12\x0f\n\x07unix_ms\x18\x01 \x01(\x03\"F\n\x0bRequestMeta\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12#\n\x04time\x18\x02 \x01(\x0b\x32\x15.planner.v2.Timestamp\"\xb3\x01\n\x08PlanStep\x12\x0f\n\x07step_id\x18\x01 \x01(\x05\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\x12\x0f\n\x07service\x18\x03 \x01(\t\x12.\n\x05input\x18\x04 \x03(\x0b\x32\x1f.planner.v2.PlanStep.InputEntry\x12\x17\n\x0f\x65xpected_output\x18\x05 \x01(\t\x1a,\n\nInputEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xb1\x01\n\x04Plan\x12\x0c\n\x04goal\x18\x01 \x01(\t\x12#\n\x05steps\x18\x02 \x03(\x0b\x32\x14.planner.v2.PlanStep\x12\x13\n\x0b\x63onstraints\x18\x03 \x03(\t\x12\x30\n\x08metadata\x18\x04 \x03(\x0b\x32\x1e.planner.v2.Plan.MetadataEntry\x1a/\n\rMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"U\n\x17GatewayRequestToPlanner\x12%\n\x04meta\x18\x01 \x01(\x0b\x32\x17.planner.v2.RequestMeta\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\"R\n\x18PlannerResponseToGateway\x12%\n\x04meta\x18\x01 \x01(\x0b\x32\x17.planner.v2.RequestMeta\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x88\x01\n\x19PlannerRequestToReasoning\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\x12\x0e\n\x06intent\x18\x03 \x01(\t\x12\x12\n\nconfidence\x18\x04 \x01(\x02\x12\x1e\n\x04plan\x18\x05 \x01(\x0b\x32\x10.planner.v2.Plan\"T\n\x1aReasoningResponseToPlanner\x12%\n\x04meta\x18\x01 \x01(\x0b\x32\x17.planner.v2.RequestMeta\x12\x0f\n\x07message\x18\x02 \x01(\t2\xe7\x01\n\x07Planner\x12j\n\x1dHandleGatewayRequestToPlanner\x12#.planner.v2.GatewayRequestToPlanner\x1a$.planner.v2.PlannerResponseToGateway\x12p\n\x1fHandlePlannerRequestToReasoning\x12%.planner.v2.PlannerRequestToReasoning\x1a&.planner.v2.ReasoningResponseToPlannerB$Z\"gateway_service/generated/v2/go;pbb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,10 +32,30 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'planner_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z\"gateway_service/generated/v2/go;pb'
-  _globals['_PLANNERREQUEST']._serialized_start=54
-  _globals['_PLANNERREQUEST']._serialized_end=111
-  _globals['_PLANNERRESPONSE']._serialized_start=114
-  _globals['_PLANNERRESPONSE']._serialized_end=249
-  _globals['_PLANNER']._serialized_start=251
-  _globals['_PLANNER']._serialized_end=331
+  _globals['_PLANSTEP_INPUTENTRY']._loaded_options = None
+  _globals['_PLANSTEP_INPUTENTRY']._serialized_options = b'8\001'
+  _globals['_PLAN_METADATAENTRY']._loaded_options = None
+  _globals['_PLAN_METADATAENTRY']._serialized_options = b'8\001'
+  _globals['_TIMESTAMP']._serialized_start=29
+  _globals['_TIMESTAMP']._serialized_end=57
+  _globals['_REQUESTMETA']._serialized_start=59
+  _globals['_REQUESTMETA']._serialized_end=129
+  _globals['_PLANSTEP']._serialized_start=132
+  _globals['_PLANSTEP']._serialized_end=311
+  _globals['_PLANSTEP_INPUTENTRY']._serialized_start=267
+  _globals['_PLANSTEP_INPUTENTRY']._serialized_end=311
+  _globals['_PLAN']._serialized_start=314
+  _globals['_PLAN']._serialized_end=491
+  _globals['_PLAN_METADATAENTRY']._serialized_start=444
+  _globals['_PLAN_METADATAENTRY']._serialized_end=491
+  _globals['_GATEWAYREQUESTTOPLANNER']._serialized_start=493
+  _globals['_GATEWAYREQUESTTOPLANNER']._serialized_end=578
+  _globals['_PLANNERRESPONSETOGATEWAY']._serialized_start=580
+  _globals['_PLANNERRESPONSETOGATEWAY']._serialized_end=662
+  _globals['_PLANNERREQUESTTOREASONING']._serialized_start=665
+  _globals['_PLANNERREQUESTTOREASONING']._serialized_end=801
+  _globals['_REASONINGRESPONSETOPLANNER']._serialized_start=803
+  _globals['_REASONINGRESPONSETOPLANNER']._serialized_end=887
+  _globals['_PLANNER']._serialized_start=890
+  _globals['_PLANNER']._serialized_end=1121
 # @@protoc_insertion_point(module_scope)

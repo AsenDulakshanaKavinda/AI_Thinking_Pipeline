@@ -20,7 +20,7 @@ import (
 	"net"
 
 	zlog "github.com/ai-thinking-pipeline/utils/zlog"
-	pb "github.com/ai-thinking-pipeline/generated/v1/go"
+	pb "github.com/ai-thinking-pipeline/generated/v3/go"
 	"github.com/ai-thinking-pipeline/handlers"	
 	"google.golang.org/grpc"
 )
@@ -32,7 +32,7 @@ func Server() {
 	}
 
 	gatewayServer := grpc.NewServer()
-	pb.RegisterGatewayServiceServer(gatewayServer, &handlers.GatewayService{})
+	pb.RegisterGatewayServer(gatewayServer, &handlers.GatewayService{})
 
 	zlog.Info("[Gateway Server] - Running on :50050")
 	gatewayServer.Serve(lis)

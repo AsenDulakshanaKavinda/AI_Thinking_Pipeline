@@ -1,13 +1,9 @@
-
 syntax = "proto3";
 
-package thinkingpipeline.v2;
+package thinking.v3;
 
-option go_package = "gateway_service/generated/v2/go;pb";
+option go_package = ".;pb";
 
-// =========================
-// Common Metadata
-// =========================
 message Timestamp {
   int64 unix_ms = 1;
 }
@@ -17,9 +13,11 @@ message RequestMeta {
   Timestamp time = 2;
 }
 
-// =========================
-// Planner Domain Models
-// =========================
+message Response {
+    RequestMeta meta = 1;
+    string message = 2;
+}
+
 message PlanStep {
   int32 step_id = 1;
   string action = 2;

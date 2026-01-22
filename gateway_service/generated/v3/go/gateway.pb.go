@@ -21,9 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// =========================
-// Gateway Messages
-// =========================
 type ClientRequestToGateway struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Meta          *RequestMeta           `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
@@ -78,8 +75,7 @@ func (x *ClientRequestToGateway) GetUserPrompt() string {
 
 type GatewayResponseToClient struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Meta          *RequestMeta           `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
-	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Response      *Response              `protobuf:"bytes,1,opt,name=response,proto3" json:"response,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -114,18 +110,11 @@ func (*GatewayResponseToClient) Descriptor() ([]byte, []int) {
 	return file_gateway_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GatewayResponseToClient) GetMeta() *RequestMeta {
+func (x *GatewayResponseToClient) GetResponse() *Response {
 	if x != nil {
-		return x.Meta
+		return x.Response
 	}
 	return nil
-}
-
-func (x *GatewayResponseToClient) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
 }
 
 var File_gateway_proto protoreflect.FileDescriptor
@@ -133,16 +122,16 @@ var File_gateway_proto protoreflect.FileDescriptor
 const file_gateway_proto_rawDesc = "" +
 	"\n" +
 	"\rgateway.proto\x12\n" +
-	"gateway.v2\x1a\x17thinking_pipeline.proto\"o\n" +
-	"\x16ClientRequestToGateway\x124\n" +
-	"\x04meta\x18\x01 \x01(\v2 .thinkingpipeline.v2.RequestMetaR\x04meta\x12\x1f\n" +
+	"gateway.v3\x1a\n" +
+	"main.proto\"g\n" +
+	"\x16ClientRequestToGateway\x12,\n" +
+	"\x04meta\x18\x01 \x01(\v2\x18.thinking.v3.RequestMetaR\x04meta\x12\x1f\n" +
 	"\vuser_prompt\x18\x02 \x01(\tR\n" +
-	"userPrompt\"i\n" +
-	"\x17GatewayResponseToClient\x124\n" +
-	"\x04meta\x18\x01 \x01(\v2 .thinkingpipeline.v2.RequestMetaR\x04meta\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2c\n" +
-	"\aGateway\x12X\n" +
-	"\rHandleRequest\x12\".gateway.v2.ClientRequestToGateway\x1a#.gateway.v2.GatewayResponseToClientB$Z\"gateway_service/generated/v2/go;pbb\x06proto3"
+	"userPrompt\"L\n" +
+	"\x17GatewayResponseToClient\x121\n" +
+	"\bresponse\x18\x01 \x01(\v2\x15.thinking.v3.ResponseR\bresponse2r\n" +
+	"\aGateway\x12g\n" +
+	"\x1cHandleClientRequestToGateway\x12\".gateway.v3.ClientRequestToGateway\x1a#.gateway.v3.GatewayResponseToClientB\x06Z\x04.;pbb\x06proto3"
 
 var (
 	file_gateway_proto_rawDescOnce sync.Once
@@ -158,15 +147,16 @@ func file_gateway_proto_rawDescGZIP() []byte {
 
 var file_gateway_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_gateway_proto_goTypes = []any{
-	(*ClientRequestToGateway)(nil),  // 0: gateway.v2.ClientRequestToGateway
-	(*GatewayResponseToClient)(nil), // 1: gateway.v2.GatewayResponseToClient
-	(*RequestMeta)(nil),             // 2: thinkingpipeline.v2.RequestMeta
+	(*ClientRequestToGateway)(nil),  // 0: gateway.v3.ClientRequestToGateway
+	(*GatewayResponseToClient)(nil), // 1: gateway.v3.GatewayResponseToClient
+	(*RequestMeta)(nil),             // 2: thinking.v3.RequestMeta
+	(*Response)(nil),                // 3: thinking.v3.Response
 }
 var file_gateway_proto_depIdxs = []int32{
-	2, // 0: gateway.v2.ClientRequestToGateway.meta:type_name -> thinkingpipeline.v2.RequestMeta
-	2, // 1: gateway.v2.GatewayResponseToClient.meta:type_name -> thinkingpipeline.v2.RequestMeta
-	0, // 2: gateway.v2.Gateway.HandleRequest:input_type -> gateway.v2.ClientRequestToGateway
-	1, // 3: gateway.v2.Gateway.HandleRequest:output_type -> gateway.v2.GatewayResponseToClient
+	2, // 0: gateway.v3.ClientRequestToGateway.meta:type_name -> thinking.v3.RequestMeta
+	3, // 1: gateway.v3.GatewayResponseToClient.response:type_name -> thinking.v3.Response
+	0, // 2: gateway.v3.Gateway.HandleClientRequestToGateway:input_type -> gateway.v3.ClientRequestToGateway
+	1, // 3: gateway.v3.Gateway.HandleClientRequestToGateway:output_type -> gateway.v3.GatewayResponseToClient
 	3, // [3:4] is the sub-list for method output_type
 	2, // [2:3] is the sub-list for method input_type
 	2, // [2:2] is the sub-list for extension type_name
@@ -179,7 +169,7 @@ func file_gateway_proto_init() {
 	if File_gateway_proto != nil {
 		return
 	}
-	file_thinking_pipeline_proto_init()
+	file_main_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

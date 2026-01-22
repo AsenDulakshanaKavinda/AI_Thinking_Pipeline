@@ -34,8 +34,8 @@ class GatewayStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.HandleRequest = channel.unary_unary(
-                '/gateway.v2.Gateway/HandleRequest',
+        self.HandleClientRequestToGateway = channel.unary_unary(
+                '/gateway.v3.Gateway/HandleClientRequestToGateway',
                 request_serializer=gateway__pb2.ClientRequestToGateway.SerializeToString,
                 response_deserializer=gateway__pb2.GatewayResponseToClient.FromString,
                 _registered_method=True)
@@ -44,8 +44,13 @@ class GatewayStub(object):
 class GatewayServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def HandleRequest(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def HandleClientRequestToGateway(self, request, context):
+        """*
+        path: Rpc Path 
+        desc: Rpc Description
+        method: post
+        version: Rpc Version
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -53,16 +58,16 @@ class GatewayServicer(object):
 
 def add_GatewayServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'HandleRequest': grpc.unary_unary_rpc_method_handler(
-                    servicer.HandleRequest,
+            'HandleClientRequestToGateway': grpc.unary_unary_rpc_method_handler(
+                    servicer.HandleClientRequestToGateway,
                     request_deserializer=gateway__pb2.ClientRequestToGateway.FromString,
                     response_serializer=gateway__pb2.GatewayResponseToClient.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'gateway.v2.Gateway', rpc_method_handlers)
+            'gateway.v3.Gateway', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('gateway.v2.Gateway', rpc_method_handlers)
+    server.add_registered_method_handlers('gateway.v3.Gateway', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
@@ -70,7 +75,7 @@ class Gateway(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def HandleRequest(request,
+    def HandleClientRequestToGateway(request,
             target,
             options=(),
             channel_credentials=None,
@@ -83,7 +88,7 @@ class Gateway(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/gateway.v2.Gateway/HandleRequest',
+            '/gateway.v3.Gateway/HandleClientRequestToGateway',
             gateway__pb2.ClientRequestToGateway.SerializeToString,
             gateway__pb2.GatewayResponseToClient.FromString,
             options,

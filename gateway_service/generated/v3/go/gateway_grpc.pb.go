@@ -19,18 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Gateway_HandleRequest_FullMethodName = "/gateway.v2.Gateway/HandleRequest"
+	Gateway_HandleClientRequestToGateway_FullMethodName = "/gateway.v3.Gateway/HandleClientRequestToGateway"
 )
 
 // GatewayClient is the client API for Gateway service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// =========================
-// Gateway Service
-// =========================
 type GatewayClient interface {
-	HandleRequest(ctx context.Context, in *ClientRequestToGateway, opts ...grpc.CallOption) (*GatewayResponseToClient, error)
+	// *
+	// path: Rpc Path
+	// desc: Rpc Description
+	// method: post
+	// version: Rpc Version
+	HandleClientRequestToGateway(ctx context.Context, in *ClientRequestToGateway, opts ...grpc.CallOption) (*GatewayResponseToClient, error)
 }
 
 type gatewayClient struct {
@@ -41,10 +42,10 @@ func NewGatewayClient(cc grpc.ClientConnInterface) GatewayClient {
 	return &gatewayClient{cc}
 }
 
-func (c *gatewayClient) HandleRequest(ctx context.Context, in *ClientRequestToGateway, opts ...grpc.CallOption) (*GatewayResponseToClient, error) {
+func (c *gatewayClient) HandleClientRequestToGateway(ctx context.Context, in *ClientRequestToGateway, opts ...grpc.CallOption) (*GatewayResponseToClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GatewayResponseToClient)
-	err := c.cc.Invoke(ctx, Gateway_HandleRequest_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Gateway_HandleClientRequestToGateway_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -54,12 +55,13 @@ func (c *gatewayClient) HandleRequest(ctx context.Context, in *ClientRequestToGa
 // GatewayServer is the server API for Gateway service.
 // All implementations must embed UnimplementedGatewayServer
 // for forward compatibility.
-//
-// =========================
-// Gateway Service
-// =========================
 type GatewayServer interface {
-	HandleRequest(context.Context, *ClientRequestToGateway) (*GatewayResponseToClient, error)
+	// *
+	// path: Rpc Path
+	// desc: Rpc Description
+	// method: post
+	// version: Rpc Version
+	HandleClientRequestToGateway(context.Context, *ClientRequestToGateway) (*GatewayResponseToClient, error)
 	mustEmbedUnimplementedGatewayServer()
 }
 
@@ -70,8 +72,8 @@ type GatewayServer interface {
 // pointer dereference when methods are called.
 type UnimplementedGatewayServer struct{}
 
-func (UnimplementedGatewayServer) HandleRequest(context.Context, *ClientRequestToGateway) (*GatewayResponseToClient, error) {
-	return nil, status.Error(codes.Unimplemented, "method HandleRequest not implemented")
+func (UnimplementedGatewayServer) HandleClientRequestToGateway(context.Context, *ClientRequestToGateway) (*GatewayResponseToClient, error) {
+	return nil, status.Error(codes.Unimplemented, "method HandleClientRequestToGateway not implemented")
 }
 func (UnimplementedGatewayServer) mustEmbedUnimplementedGatewayServer() {}
 func (UnimplementedGatewayServer) testEmbeddedByValue()                 {}
@@ -94,20 +96,20 @@ func RegisterGatewayServer(s grpc.ServiceRegistrar, srv GatewayServer) {
 	s.RegisterService(&Gateway_ServiceDesc, srv)
 }
 
-func _Gateway_HandleRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Gateway_HandleClientRequestToGateway_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ClientRequestToGateway)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GatewayServer).HandleRequest(ctx, in)
+		return srv.(GatewayServer).HandleClientRequestToGateway(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Gateway_HandleRequest_FullMethodName,
+		FullMethod: Gateway_HandleClientRequestToGateway_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GatewayServer).HandleRequest(ctx, req.(*ClientRequestToGateway))
+		return srv.(GatewayServer).HandleClientRequestToGateway(ctx, req.(*ClientRequestToGateway))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -116,12 +118,12 @@ func _Gateway_HandleRequest_Handler(srv interface{}, ctx context.Context, dec fu
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Gateway_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "gateway.v2.Gateway",
+	ServiceName: "gateway.v3.Gateway",
 	HandlerType: (*GatewayServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "HandleRequest",
-			Handler:    _Gateway_HandleRequest_Handler,
+			MethodName: "HandleClientRequestToGateway",
+			Handler:    _Gateway_HandleClientRequestToGateway_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

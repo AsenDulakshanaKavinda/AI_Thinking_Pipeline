@@ -1,31 +1,40 @@
 syntax = "proto3";
 
-package gateway.v2;
+package "gateway.v2";
 
 option go_package = "gateway_service/generated/v2/go;pb";
 
-import "thinking_pipeline.proto";
 
-// =========================
-// Gateway Messages
-// =========================
+
+message Timestamp {
+  int64 unix_ms = 1;
+}
+
+message RequestMeta {
+  string request_id = 1;
+  Timestamp time = 2;
+}
 message ClientRequestToGateway {
-  thinkingpipeline.v2.RequestMeta meta = 1;
+  RequestMeta meta = 1;
   string user_prompt = 2;
 }
 
 message GatewayResponseToClient {
-  thinkingpipeline.v2.RequestMeta meta = 1;
+  RequestMeta meta = 1;
   string message = 2;
 }
 
-// =========================
-// Gateway Service
-// =========================
+message GatewayRequestToPlanner {
+  RequestMeta meta = 1;
+  string user_prompt = 2;
+}
+
+message PlannerResponseToGateway {
+  RequestMeta meta = 1;
+  string message = 2;
+}
+
 service Gateway {
-  rpc HandleRequest (
-    ClientRequestToGateway
-  ) returns (
-    GatewayResponseToClient
-  );
+  rpc HandleRequest (ClientRequestToGateway) returns (GatewayResponseToClient);
+  rpc HandleGatewayRequestToPlanner(GatewayRequestToPlanner) returns (PlannerResponseToGateway)
 }

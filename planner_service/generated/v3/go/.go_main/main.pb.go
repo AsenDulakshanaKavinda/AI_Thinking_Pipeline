@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v3.12.4
-// source: thinking_pipeline.proto
+// source: main.proto
 
 package pb
 
@@ -21,9 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// =========================
-// Common Metadata
-// =========================
 type Timestamp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UnixMs        int64                  `protobuf:"varint,1,opt,name=unix_ms,json=unixMs,proto3" json:"unix_ms,omitempty"`
@@ -33,7 +30,7 @@ type Timestamp struct {
 
 func (x *Timestamp) Reset() {
 	*x = Timestamp{}
-	mi := &file_thinking_pipeline_proto_msgTypes[0]
+	mi := &file_main_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +42,7 @@ func (x *Timestamp) String() string {
 func (*Timestamp) ProtoMessage() {}
 
 func (x *Timestamp) ProtoReflect() protoreflect.Message {
-	mi := &file_thinking_pipeline_proto_msgTypes[0]
+	mi := &file_main_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +55,7 @@ func (x *Timestamp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Timestamp.ProtoReflect.Descriptor instead.
 func (*Timestamp) Descriptor() ([]byte, []int) {
-	return file_thinking_pipeline_proto_rawDescGZIP(), []int{0}
+	return file_main_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Timestamp) GetUnixMs() int64 {
@@ -78,7 +75,7 @@ type RequestMeta struct {
 
 func (x *RequestMeta) Reset() {
 	*x = RequestMeta{}
-	mi := &file_thinking_pipeline_proto_msgTypes[1]
+	mi := &file_main_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -90,7 +87,7 @@ func (x *RequestMeta) String() string {
 func (*RequestMeta) ProtoMessage() {}
 
 func (x *RequestMeta) ProtoReflect() protoreflect.Message {
-	mi := &file_thinking_pipeline_proto_msgTypes[1]
+	mi := &file_main_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -103,7 +100,7 @@ func (x *RequestMeta) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RequestMeta.ProtoReflect.Descriptor instead.
 func (*RequestMeta) Descriptor() ([]byte, []int) {
-	return file_thinking_pipeline_proto_rawDescGZIP(), []int{1}
+	return file_main_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *RequestMeta) GetRequestId() string {
@@ -120,9 +117,58 @@ func (x *RequestMeta) GetTime() *Timestamp {
 	return nil
 }
 
-// =========================
-// Planner Domain Models
-// =========================
+type Response struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Meta          *RequestMeta           `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Response) Reset() {
+	*x = Response{}
+	mi := &file_main_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Response) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Response) ProtoMessage() {}
+
+func (x *Response) ProtoReflect() protoreflect.Message {
+	mi := &file_main_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Response.ProtoReflect.Descriptor instead.
+func (*Response) Descriptor() ([]byte, []int) {
+	return file_main_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Response) GetMeta() *RequestMeta {
+	if x != nil {
+		return x.Meta
+	}
+	return nil
+}
+
+func (x *Response) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 type PlanStep struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	StepId         int32                  `protobuf:"varint,1,opt,name=step_id,json=stepId,proto3" json:"step_id,omitempty"`
@@ -136,7 +182,7 @@ type PlanStep struct {
 
 func (x *PlanStep) Reset() {
 	*x = PlanStep{}
-	mi := &file_thinking_pipeline_proto_msgTypes[2]
+	mi := &file_main_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -148,7 +194,7 @@ func (x *PlanStep) String() string {
 func (*PlanStep) ProtoMessage() {}
 
 func (x *PlanStep) ProtoReflect() protoreflect.Message {
-	mi := &file_thinking_pipeline_proto_msgTypes[2]
+	mi := &file_main_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -161,7 +207,7 @@ func (x *PlanStep) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PlanStep.ProtoReflect.Descriptor instead.
 func (*PlanStep) Descriptor() ([]byte, []int) {
-	return file_thinking_pipeline_proto_rawDescGZIP(), []int{2}
+	return file_main_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *PlanStep) GetStepId() int32 {
@@ -211,7 +257,7 @@ type Plan struct {
 
 func (x *Plan) Reset() {
 	*x = Plan{}
-	mi := &file_thinking_pipeline_proto_msgTypes[3]
+	mi := &file_main_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -223,7 +269,7 @@ func (x *Plan) String() string {
 func (*Plan) ProtoMessage() {}
 
 func (x *Plan) ProtoReflect() protoreflect.Message {
-	mi := &file_thinking_pipeline_proto_msgTypes[3]
+	mi := &file_main_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -236,7 +282,7 @@ func (x *Plan) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Plan.ProtoReflect.Descriptor instead.
 func (*Plan) Descriptor() ([]byte, []int) {
-	return file_thinking_pipeline_proto_rawDescGZIP(), []int{3}
+	return file_main_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Plan) GetGoal() string {
@@ -267,89 +313,95 @@ func (x *Plan) GetMetadata() map[string]string {
 	return nil
 }
 
-var File_thinking_pipeline_proto protoreflect.FileDescriptor
+var File_main_proto protoreflect.FileDescriptor
 
-const file_thinking_pipeline_proto_rawDesc = "" +
+const file_main_proto_rawDesc = "" +
 	"\n" +
-	"\x17thinking_pipeline.proto\x12\x13thinkingpipeline.v2\"$\n" +
+	"\n" +
+	"main.proto\x12\vthinking.v3\"$\n" +
 	"\tTimestamp\x12\x17\n" +
-	"\aunix_ms\x18\x01 \x01(\x03R\x06unixMs\"`\n" +
+	"\aunix_ms\x18\x01 \x01(\x03R\x06unixMs\"X\n" +
 	"\vRequestMeta\x12\x1d\n" +
 	"\n" +
-	"request_id\x18\x01 \x01(\tR\trequestId\x122\n" +
-	"\x04time\x18\x02 \x01(\v2\x1e.thinkingpipeline.v2.TimestampR\x04time\"\xf8\x01\n" +
+	"request_id\x18\x01 \x01(\tR\trequestId\x12*\n" +
+	"\x04time\x18\x02 \x01(\v2\x16.thinking.v3.TimestampR\x04time\"R\n" +
+	"\bResponse\x12,\n" +
+	"\x04meta\x18\x01 \x01(\v2\x18.thinking.v3.RequestMetaR\x04meta\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"\xf0\x01\n" +
 	"\bPlanStep\x12\x17\n" +
 	"\astep_id\x18\x01 \x01(\x05R\x06stepId\x12\x16\n" +
 	"\x06action\x18\x02 \x01(\tR\x06action\x12\x18\n" +
-	"\aservice\x18\x03 \x01(\tR\aservice\x12>\n" +
-	"\x05input\x18\x04 \x03(\v2(.thinkingpipeline.v2.PlanStep.InputEntryR\x05input\x12'\n" +
+	"\aservice\x18\x03 \x01(\tR\aservice\x126\n" +
+	"\x05input\x18\x04 \x03(\v2 .thinking.v3.PlanStep.InputEntryR\x05input\x12'\n" +
 	"\x0fexpected_output\x18\x05 \x01(\tR\x0eexpectedOutput\x1a8\n" +
 	"\n" +
 	"InputEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf3\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe3\x01\n" +
 	"\x04Plan\x12\x12\n" +
-	"\x04goal\x18\x01 \x01(\tR\x04goal\x123\n" +
-	"\x05steps\x18\x02 \x03(\v2\x1d.thinkingpipeline.v2.PlanStepR\x05steps\x12 \n" +
-	"\vconstraints\x18\x03 \x03(\tR\vconstraints\x12C\n" +
-	"\bmetadata\x18\x04 \x03(\v2'.thinkingpipeline.v2.Plan.MetadataEntryR\bmetadata\x1a;\n" +
+	"\x04goal\x18\x01 \x01(\tR\x04goal\x12+\n" +
+	"\x05steps\x18\x02 \x03(\v2\x15.thinking.v3.PlanStepR\x05steps\x12 \n" +
+	"\vconstraints\x18\x03 \x03(\tR\vconstraints\x12;\n" +
+	"\bmetadata\x18\x04 \x03(\v2\x1f.thinking.v3.Plan.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B$Z\"gateway_service/generated/v2/go;pbb\x06proto3"
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\rZ\v.go_main;pbb\x06proto3"
 
 var (
-	file_thinking_pipeline_proto_rawDescOnce sync.Once
-	file_thinking_pipeline_proto_rawDescData []byte
+	file_main_proto_rawDescOnce sync.Once
+	file_main_proto_rawDescData []byte
 )
 
-func file_thinking_pipeline_proto_rawDescGZIP() []byte {
-	file_thinking_pipeline_proto_rawDescOnce.Do(func() {
-		file_thinking_pipeline_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_thinking_pipeline_proto_rawDesc), len(file_thinking_pipeline_proto_rawDesc)))
+func file_main_proto_rawDescGZIP() []byte {
+	file_main_proto_rawDescOnce.Do(func() {
+		file_main_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_main_proto_rawDesc), len(file_main_proto_rawDesc)))
 	})
-	return file_thinking_pipeline_proto_rawDescData
+	return file_main_proto_rawDescData
 }
 
-var file_thinking_pipeline_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_thinking_pipeline_proto_goTypes = []any{
-	(*Timestamp)(nil),   // 0: thinkingpipeline.v2.Timestamp
-	(*RequestMeta)(nil), // 1: thinkingpipeline.v2.RequestMeta
-	(*PlanStep)(nil),    // 2: thinkingpipeline.v2.PlanStep
-	(*Plan)(nil),        // 3: thinkingpipeline.v2.Plan
-	nil,                 // 4: thinkingpipeline.v2.PlanStep.InputEntry
-	nil,                 // 5: thinkingpipeline.v2.Plan.MetadataEntry
+var file_main_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_main_proto_goTypes = []any{
+	(*Timestamp)(nil),   // 0: thinking.v3.Timestamp
+	(*RequestMeta)(nil), // 1: thinking.v3.RequestMeta
+	(*Response)(nil),    // 2: thinking.v3.Response
+	(*PlanStep)(nil),    // 3: thinking.v3.PlanStep
+	(*Plan)(nil),        // 4: thinking.v3.Plan
+	nil,                 // 5: thinking.v3.PlanStep.InputEntry
+	nil,                 // 6: thinking.v3.Plan.MetadataEntry
 }
-var file_thinking_pipeline_proto_depIdxs = []int32{
-	0, // 0: thinkingpipeline.v2.RequestMeta.time:type_name -> thinkingpipeline.v2.Timestamp
-	4, // 1: thinkingpipeline.v2.PlanStep.input:type_name -> thinkingpipeline.v2.PlanStep.InputEntry
-	2, // 2: thinkingpipeline.v2.Plan.steps:type_name -> thinkingpipeline.v2.PlanStep
-	5, // 3: thinkingpipeline.v2.Plan.metadata:type_name -> thinkingpipeline.v2.Plan.MetadataEntry
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+var file_main_proto_depIdxs = []int32{
+	0, // 0: thinking.v3.RequestMeta.time:type_name -> thinking.v3.Timestamp
+	1, // 1: thinking.v3.Response.meta:type_name -> thinking.v3.RequestMeta
+	5, // 2: thinking.v3.PlanStep.input:type_name -> thinking.v3.PlanStep.InputEntry
+	3, // 3: thinking.v3.Plan.steps:type_name -> thinking.v3.PlanStep
+	6, // 4: thinking.v3.Plan.metadata:type_name -> thinking.v3.Plan.MetadataEntry
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
-func init() { file_thinking_pipeline_proto_init() }
-func file_thinking_pipeline_proto_init() {
-	if File_thinking_pipeline_proto != nil {
+func init() { file_main_proto_init() }
+func file_main_proto_init() {
+	if File_main_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_thinking_pipeline_proto_rawDesc), len(file_thinking_pipeline_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_main_proto_rawDesc), len(file_main_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_thinking_pipeline_proto_goTypes,
-		DependencyIndexes: file_thinking_pipeline_proto_depIdxs,
-		MessageInfos:      file_thinking_pipeline_proto_msgTypes,
+		GoTypes:           file_main_proto_goTypes,
+		DependencyIndexes: file_main_proto_depIdxs,
+		MessageInfos:      file_main_proto_msgTypes,
 	}.Build()
-	File_thinking_pipeline_proto = out.File
-	file_thinking_pipeline_proto_goTypes = nil
-	file_thinking_pipeline_proto_depIdxs = nil
+	File_main_proto = out.File
+	file_main_proto_goTypes = nil
+	file_main_proto_depIdxs = nil
 }

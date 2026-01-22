@@ -34,29 +34,39 @@ class PlannerStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.HandleGatewayRequestToPlanner = channel.unary_unary(
-                '/planner.v2.Planner/HandleGatewayRequestToPlanner',
-                request_serializer=planner__pb2.GatewayRequestToPlanner.SerializeToString,
-                response_deserializer=planner__pb2.PlannerResponseToGateway.FromString,
-                _registered_method=True)
         self.HandlePlannerRequestToReasoning = channel.unary_unary(
-                '/planner.v2.Planner/HandlePlannerRequestToReasoning',
+                '/planner.v3.Planner/HandlePlannerRequestToReasoning',
                 request_serializer=planner__pb2.PlannerRequestToReasoning.SerializeToString,
                 response_deserializer=planner__pb2.ReasoningResponseToPlanner.FromString,
+                _registered_method=True)
+        self.HandleGatewayRequestToPlanner = channel.unary_unary(
+                '/planner.v3.Planner/HandleGatewayRequestToPlanner',
+                request_serializer=planner__pb2.GatewayRequestToPlanner.SerializeToString,
+                response_deserializer=planner__pb2.PlannerResponseToGateway.FromString,
                 _registered_method=True)
 
 
 class PlannerServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def HandleGatewayRequestToPlanner(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def HandlePlannerRequestToReasoning(self, request, context):
+        """*
+        path: Rpc Path 
+        desc: Rpc Description
+        method: post
+        version: Rpc Version
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def HandlePlannerRequestToReasoning(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+    def HandleGatewayRequestToPlanner(self, request, context):
+        """*
+        path: Rpc Path 
+        desc: Rpc Description
+        method: post
+        version: Rpc Version
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -64,53 +74,26 @@ class PlannerServicer(object):
 
 def add_PlannerServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'HandleGatewayRequestToPlanner': grpc.unary_unary_rpc_method_handler(
-                    servicer.HandleGatewayRequestToPlanner,
-                    request_deserializer=planner__pb2.GatewayRequestToPlanner.FromString,
-                    response_serializer=planner__pb2.PlannerResponseToGateway.SerializeToString,
-            ),
             'HandlePlannerRequestToReasoning': grpc.unary_unary_rpc_method_handler(
                     servicer.HandlePlannerRequestToReasoning,
                     request_deserializer=planner__pb2.PlannerRequestToReasoning.FromString,
                     response_serializer=planner__pb2.ReasoningResponseToPlanner.SerializeToString,
             ),
+            'HandleGatewayRequestToPlanner': grpc.unary_unary_rpc_method_handler(
+                    servicer.HandleGatewayRequestToPlanner,
+                    request_deserializer=planner__pb2.GatewayRequestToPlanner.FromString,
+                    response_serializer=planner__pb2.PlannerResponseToGateway.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'planner.v2.Planner', rpc_method_handlers)
+            'planner.v3.Planner', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('planner.v2.Planner', rpc_method_handlers)
+    server.add_registered_method_handlers('planner.v3.Planner', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
 class Planner(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def HandleGatewayRequestToPlanner(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(
-            request,
-            target,
-            '/planner.v2.Planner/HandleGatewayRequestToPlanner',
-            planner__pb2.GatewayRequestToPlanner.SerializeToString,
-            planner__pb2.PlannerResponseToGateway.FromString,
-            options,
-            channel_credentials,
-            insecure,
-            call_credentials,
-            compression,
-            wait_for_ready,
-            timeout,
-            metadata,
-            _registered_method=True)
 
     @staticmethod
     def HandlePlannerRequestToReasoning(request,
@@ -126,9 +109,36 @@ class Planner(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/planner.v2.Planner/HandlePlannerRequestToReasoning',
+            '/planner.v3.Planner/HandlePlannerRequestToReasoning',
             planner__pb2.PlannerRequestToReasoning.SerializeToString,
             planner__pb2.ReasoningResponseToPlanner.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def HandleGatewayRequestToPlanner(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/planner.v3.Planner/HandleGatewayRequestToPlanner',
+            planner__pb2.GatewayRequestToPlanner.SerializeToString,
+            planner__pb2.PlannerResponseToGateway.FromString,
             options,
             channel_credentials,
             insecure,

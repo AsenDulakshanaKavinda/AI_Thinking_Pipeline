@@ -18,10 +18,9 @@ dedicated client or transport layer for cleaner architecture.
 
 import (
 	"context"
-	"log"
 	"time"
 
-	pb "github.com/ai-thinking-pipeline/generated/v1/go"
+	pb "github.com/ai-thinking-pipeline/generated/v3/go"
 	zlog "github.com/ai-thinking-pipeline/utils/zlog"
 
 	"google.golang.org/grpc"
@@ -38,9 +37,9 @@ func ClientRequestToGatewayFn() {
 	}
 	defer conn.Close()
 
-	client := pb.NewGatewayServiceClient(conn)
+	client := pb.NewGatewayClient(conn)
 
-	resp, err := client.HandleRequest(
+	resp, err := client.HandleClientRequestToGateway(
 		context.Background(),
 		&pb.ClientRequestToGateway{
 			Meta: &pb.RequestMeta{
@@ -56,7 +55,6 @@ func ClientRequestToGatewayFn() {
 		zlog.Error(err.Error())
 	}
 
-	log.Println("- Response:- ", resp.Message)
-
+	zlog.Info(resp.Response.Message)
 }
 

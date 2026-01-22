@@ -22,10 +22,9 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-import thinking_pipeline_pb2 as thinking__pipeline__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rgateway.proto\x12\ngateway.v2\x1a\x17thinking_pipeline.proto\"]\n\x16\x43lientRequestToGateway\x12.\n\x04meta\x18\x01 \x01(\x0b\x32 .thinkingpipeline.v2.RequestMeta\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\"Z\n\x17GatewayResponseToClient\x12.\n\x04meta\x18\x01 \x01(\x0b\x32 .thinkingpipeline.v2.RequestMeta\x12\x0f\n\x07message\x18\x02 \x01(\t2c\n\x07Gateway\x12X\n\rHandleRequest\x12\".gateway.v2.ClientRequestToGateway\x1a#.gateway.v2.GatewayResponseToClientB$Z\"gateway_service/generated/v2/go;pbb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rgateway.proto\x12\ngateway.v2\"\x1c\n\tTimestamp\x12\x0f\n\x07unix_ms\x18\x01 \x01(\x03\"F\n\x0bRequestMeta\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12#\n\x04time\x18\x02 \x01(\x0b\x32\x15.gateway.v2.Timestamp\"T\n\x16\x43lientRequestToGateway\x12%\n\x04meta\x18\x01 \x01(\x0b\x32\x17.gateway.v2.RequestMeta\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\"Q\n\x17GatewayResponseToClient\x12%\n\x04meta\x18\x01 \x01(\x0b\x32\x17.gateway.v2.RequestMeta\x12\x0f\n\x07message\x18\x02 \x01(\t2c\n\x07Gateway\x12X\n\rHandleRequest\x12\".gateway.v2.ClientRequestToGateway\x1a#.gateway.v2.GatewayResponseToClientB$Z\"gateway_service/generated/v2/go;pbb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,10 +32,14 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'gateway_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z\"gateway_service/generated/v2/go;pb'
-  _globals['_CLIENTREQUESTTOGATEWAY']._serialized_start=54
-  _globals['_CLIENTREQUESTTOGATEWAY']._serialized_end=147
-  _globals['_GATEWAYRESPONSETOCLIENT']._serialized_start=149
-  _globals['_GATEWAYRESPONSETOCLIENT']._serialized_end=239
-  _globals['_GATEWAY']._serialized_start=241
-  _globals['_GATEWAY']._serialized_end=340
+  _globals['_TIMESTAMP']._serialized_start=29
+  _globals['_TIMESTAMP']._serialized_end=57
+  _globals['_REQUESTMETA']._serialized_start=59
+  _globals['_REQUESTMETA']._serialized_end=129
+  _globals['_CLIENTREQUESTTOGATEWAY']._serialized_start=131
+  _globals['_CLIENTREQUESTTOGATEWAY']._serialized_end=215
+  _globals['_GATEWAYRESPONSETOCLIENT']._serialized_start=217
+  _globals['_GATEWAYRESPONSETOCLIENT']._serialized_end=298
+  _globals['_GATEWAY']._serialized_start=300
+  _globals['_GATEWAY']._serialized_end=399
 # @@protoc_insertion_point(module_scope)
