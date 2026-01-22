@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package planner.v2;
+
+option go_package = "gateway_service/generated/v2/go;pb";
+
+import "thinking_pipeline.proto";
+
+// =========================
+// Planner Service
+// =========================
+service Planner {
+  rpc CreatePlan (PlannerRequest) returns (PlannerResponse);
+}
+
+// =========================
+// Request
+// =========================
+message PlannerRequest {
+  string request_id = 1;
+  string user_prompt = 2;
+}
+
+// =========================
+// Response
+// =========================
+message PlannerResponse {
+  string request_id = 1;
+  string user_prompt = 2;
+  string intent = 3;
+  float confidence = 4;
+  thinkingpipeline.v2.Plan plan = 5;
+}

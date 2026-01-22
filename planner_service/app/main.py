@@ -11,9 +11,20 @@ def main():
             "request_id": str(uuid.uuid4()),
             "user_prompt": "Design a scalable AI thinking pipeline"
         }
-        print(initial_state)
         result = app.invoke(initial_state)
-        print(result)
+
+        output = {
+            "request_id": result["request_id"],
+            "user_prompt": result["user_prompt"],
+            "intent": result["intent"],
+            "confidence": result["confidence"],
+            "plan": result["plan"].model_dump()  
+        }
+
+        print(output)
+
+        return output
+
     except Exception as e:
         PlannerException(
             e,

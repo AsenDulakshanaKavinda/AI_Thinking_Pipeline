@@ -1,0 +1,36 @@
+
+syntax = "proto3";
+
+package thinkingpipeline.v2;
+
+option go_package = "gateway_service/generated/v2/go;pb";
+
+// =========================
+// Common Metadata
+// =========================
+message Timestamp {
+  int64 unix_ms = 1;
+}
+
+message RequestMeta {
+  string request_id = 1;
+  Timestamp time = 2;
+}
+
+// =========================
+// Planner Domain Models
+// =========================
+message PlanStep {
+  int32 step_id = 1;
+  string action = 2;
+  string service = 3;
+  map<string, string> input = 4;
+  string expected_output = 5;
+}
+
+message Plan {
+  string goal = 1;
+  repeated PlanStep steps = 2;
+  repeated string constraints = 3;
+  map<string, string> metadata = 4;
+}
