@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package gateway.v3;
+
+option go_package = ".;pb";
+
+import "main.proto";
+
+message ClientRequestToGateway {
+  thinking.v3.RequestMeta meta = 1;
+  string user_prompt = 2;
+}
+
+message GatewayResponseToClient {
+    thinking.v3.Response response = 1;
+}
+
+
+service Gateway{
+  /**
+   path: Rpc Path 
+   desc: Rpc Description
+   method: post
+   version: Rpc Version
+  */
+  rpc HandleClientRequestToGateway (ClientRequestToGateway) returns (GatewayResponseToClient);
+
+}
+

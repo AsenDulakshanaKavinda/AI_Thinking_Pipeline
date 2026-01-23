@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package planner.v3;
+
+option go_package = ".;pb";
+
+import "main.proto";
+
+
+message GatewayRequestToPlanner {
+  thinking.v3.RequestMeta meta = 1;
+  string user_prompt = 2;
+}
+
+message PlannerResponseToGateway {
+  thinking.v3.Response response = 1;
+}
+
+message PlannerRequestToReasoning {
+  string request_id = 1;
+  string user_prompt = 2;
+  string intent = 3;
+  float confidence = 4;
+  thinking.v3.Plan plan = 5;
+}
+
+message ReasoningResponseToPlanner {
+  thinking.v3.Response response = 1;
+}
+
+service Planner{
+  /**
+   path: Rpc Path 
+   desc: Rpc Description
+   method: post
+   version: Rpc Version
+  */
+  rpc HandlePlannerRequestToReasoning (PlannerRequestToReasoning) returns (ReasoningResponseToPlanner);
+
+  /**
+   path: Rpc Path 
+   desc: Rpc Description
+   method: post
+   version: Rpc Version
+  */
+  rpc HandleGatewayRequestToPlanner (GatewayRequestToPlanner) returns (PlannerResponseToGateway);
+ 
+}

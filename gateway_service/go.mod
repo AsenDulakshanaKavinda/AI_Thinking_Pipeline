@@ -5,6 +5,7 @@ go 1.25.5
 require google.golang.org/grpc v1.78.0
 
 require (
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/stretchr/testify v1.10.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 )

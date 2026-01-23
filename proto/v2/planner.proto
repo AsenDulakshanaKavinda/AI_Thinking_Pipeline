@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package "planner.v2";
+
+option go_package = "gateway_service/generated/v2/go;pb";
+
+service Planner {
+  rpc HandleGatewayRequestToPlanner (GatewayRequestToPlanner) returns (PlannerResponseToGateway);
+  rpc HandlePlannerRequestToReasoning (PlannerRequestToReasoning) returns (ReasoningResponseToPlanner);
+}
+
+message Timestamp {
+  int64 unix_ms = 1;
+}
+
+message RequestMeta {
+  string request_id = 1;
+  Timestamp time = 2;
+}
+
+message PlanStep {
+  int32 step_id = 1;
+  string action = 2;
+  string service = 3;
+  map<string, string> input = 4;
+  string expected_output = 5;
+}
+
+message Plan {
+  string goal = 1;
+  repeated PlanStep steps = 2;
+  repeated string constraints = 3;
+  map<string, string> metadata = 4;
+}
+
+message GatewayRequestToPlanner {
+  RequestMeta meta = 1;
+  string user_prompt = 2;
+}
+
+message PlannerResponseToGateway {
+    RequestMeta meta = 1;
+    string message = 2;
+}
+
+message PlannerRequestToReasoning {
+  string request_id = 1;
+  string user_prompt = 2;
+  string intent = 3;
+  float confidence = 4;
+  Plan plan = 5;
+}
+
+message ReasoningResponseToPlanner {
+  RequestMeta meta = 1;
+  string message = 2;
+}
+
+
+
