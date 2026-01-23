@@ -22,7 +22,9 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-import main_pb2 as main__pb2
+# import main_pb2 as main__pb2
+import generated.v3.python.main_pb2 as main__pb2
+
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rplanner.proto\x12\nplanner.v3\x1a\nmain.proto\"V\n\x17GatewayRequestToPlanner\x12&\n\x04meta\x18\x01 \x01(\x0b\x32\x18.thinking.v3.RequestMeta\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\"C\n\x18PlannerResponseToGateway\x12\'\n\x08response\x18\x01 \x01(\x0b\x32\x15.thinking.v3.Response\"\x89\x01\n\x19PlannerRequestToReasoning\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\x12\x0e\n\x06intent\x18\x03 \x01(\t\x12\x12\n\nconfidence\x18\x04 \x01(\x02\x12\x1f\n\x04plan\x18\x05 \x01(\x0b\x32\x11.thinking.v3.Plan\"E\n\x1aReasoningResponseToPlanner\x12\'\n\x08response\x18\x01 \x01(\x0b\x32\x15.thinking.v3.Response2\xe7\x01\n\x07Planner\x12p\n\x1fHandlePlannerRequestToReasoning\x12%.planner.v3.PlannerRequestToReasoning\x1a&.planner.v3.ReasoningResponseToPlanner\x12j\n\x1dHandleGatewayRequestToPlanner\x12#.planner.v3.GatewayRequestToPlanner\x1a$.planner.v3.PlannerResponseToGatewayB\x06Z\x04.;pbb\x06proto3')

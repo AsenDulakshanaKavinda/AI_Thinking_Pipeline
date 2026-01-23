@@ -22,7 +22,8 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-import main_pb2 as main__pb2
+# import main_pb2 as main__pb2
+import generated.v3.python.main_pb2 as main__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rgateway.proto\x12\ngateway.v3\x1a\nmain.proto\"U\n\x16\x43lientRequestToGateway\x12&\n\x04meta\x18\x01 \x01(\x0b\x32\x18.thinking.v3.RequestMeta\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\"B\n\x17GatewayResponseToClient\x12\'\n\x08response\x18\x01 \x01(\x0b\x32\x15.thinking.v3.Response2r\n\x07Gateway\x12g\n\x1cHandleClientRequestToGateway\x12\".gateway.v3.ClientRequestToGateway\x1a#.gateway.v3.GatewayResponseToClientB\x06Z\x04.;pbb\x06proto3')

@@ -26,6 +26,7 @@ import (
 )
 
 func Server() {
+	zlog.Info("[Gateway Server] - Starting on :50050")
 	lis, err := net.Listen("tcp", ":50050")
 	if err != nil {
 		zlog.Error(err.Error())

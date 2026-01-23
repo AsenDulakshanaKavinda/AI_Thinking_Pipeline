@@ -7,6 +7,7 @@ from app.utils import log, PlannerException
 
 def planner_node(state: PlannerState) -> PlannerState:
     try:
+        log.info(f"Generating plan for the request: {state['request_id']}")
         planner_prompt = load_prompt(filepath="app/prompts/planner_prompt.txt")
         if not planner_prompt:
             PlannerException(

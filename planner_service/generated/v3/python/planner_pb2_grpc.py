@@ -3,7 +3,9 @@
 import grpc
 import warnings
 
-import planner_pb2 as planner__pb2
+
+import generated.v3.python.planner_pb2 as planner__pb2
+
 
 GRPC_GENERATED_VERSION = '1.76.0'
 GRPC_VERSION = grpc.__version__

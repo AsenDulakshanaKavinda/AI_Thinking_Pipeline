@@ -1,7 +1,10 @@
 
 import grpc
-import proto.generated.v2.planner_pb2 as pb2
-import proto.generated.v2.planner_pb2_grpc as pb2_grpc
+""" import proto.generated.v2.planner_pb2 as pb2
+import proto.generated.v2.planner_pb2_grpc as pb2_grpc """
+
+import generated.v3.python.planner_pb2 as pb2
+import generated.v3.python.gateway_pb2_grpc as pb2_grpc
 
 from app.graph import build_graph
 

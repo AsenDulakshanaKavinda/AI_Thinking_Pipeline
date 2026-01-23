@@ -8,6 +8,7 @@ from .node_helper import load_prompt
 
 def intent_node(state: PlannerState) -> PlannerState:
     try:
+        log.info(f"Detecting intent for the request: {state['request_id']}")
         intent_prompt = load_prompt(filepath="app/prompts/intent_prompt.txt")
         if not intent_prompt:
             PlannerException(

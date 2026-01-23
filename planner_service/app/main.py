@@ -1,9 +1,10 @@
 from app.utils import log, PlannerException
 from app.graph import build_graph
 import uuid
+from app.server import create_planner_server
 
 
-def main():
+""" def main():
     try:
         log.info("Graph test starting...")
         app = build_graph()
@@ -29,8 +30,23 @@ def main():
         PlannerException(
             e,
             context={"operation": "testing graph", "status": "failed"}
-        )
+        ) """
+
+def main():
+    create_planner_server()
 
 
 if __name__ == "__main__":
-    main()
+
+    try:
+        main()
+    except Exception as e:
+        PlannerException(
+            e, 
+            context={
+                "operation": "Planner server", "message": "Error"
+            }
+        )
+    except KeyboardInterrupt:
+        log.info("[Planner Server] - Shutdown.")
+
