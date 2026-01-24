@@ -6,41 +6,24 @@ import proto.generated.v2.planner_pb2_grpc as pb2_grpc """
 import generated.v3.python.planner_pb2 as pb2
 import generated.v3.python.gateway_pb2_grpc as pb2_grpc
 
+import generated.v4.python.reasoning_pb2 as reasoning_pb2
+import generated.v4.python.reasoning_pb2_grpc as reasoning_pb2_grpc
+
 from app.graph import build_graph
 
 from app.utils import log, PlannerException
+
+def planner_request_to_reasoning(incoming_request_gateway):
+    channel = grpc.insecure_channel("localhost: 50052")
+    stud = reasoning_pb2_grpc.ReasoningStub(channel=channel)
+
 
 
 def planner_request_to_reasoning(incoming_request_gateway):
     channel = grpc.insecure_channel("localhost: 50052")
     stdu = pb2_grpc.PlannerStub(channel=channel)
 
-
-    if not incoming_request_gateway:
-        PlannerException(
-            "incoming gateway request is empty of missing.",
-            context={
-                "operation": "planner_response_to_gateway"
-            }
-        )
-
-    request_id = incoming_request_gateway.meta.request_id
-    if not request_id:
-        PlannerException(
-            "request id is empty of missing.",
-            context={
-                "operation": "planner_response_to_gateway"
-            }
-        )
-
-    user_prompt = incoming_request_gateway.user_prompt
-    if not user_prompt:
-        PlannerException(
-            "user prompt is empty of missing.",
-            context={
-                "operation": "planner_response_to_gateway"
-            }
-        )
+    request_id, user_prompt = verify_incoming_request(incoming_request_gateway)
 
     payload = {
         "request_id": request_id,
@@ -76,6 +59,32 @@ def planner_request_to_reasoning(incoming_request_gateway):
 
     return stdu.HandlePlannerRequestToReasoning(reasoning_request)
 
+def verify_incoming_request(incoming_request):
+    if not incoming_request:
+        PlannerException(
+            "incoming gateway request is empty of missing.",
+            context={
+                "operation": "planner_response_to_gateway"
+            }
+        )
 
+    request_id = incoming_request.meta.request_id
+    if not request_id:
+        PlannerException(
+            "request id is empty of missing.",
+            context={
+                "operation": "planner_response_to_gateway"
+            }
+        )
 
+    user_prompt = incoming_request.user_prompt
+    if not user_prompt:
+        PlannerException(
+            "user prompt is empty of missing.",
+            context={
+                "operation": "planner_response_to_gateway"
+            }
+        )
     
+    return request_id, user_prompt
+

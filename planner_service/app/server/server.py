@@ -6,6 +6,7 @@ import generated.v3.python.planner_pb2_grpc as pb2_grpc
 
 from .handlers import (
     planner_response_to_gateway,
+    planner_request_to_reasoning
     
 )
 
@@ -30,7 +31,7 @@ class PlannerService(pb2_grpc.PlannerServicer):
 """     def HandlePlannerRequestToReasoning(self, request, context):
         try:
             log.info("Handle planner request to reasoning")
-            return handle_planner_request_to_reasoning(request)
+            return planner_request_to_reasoning(request)
         except Exception as e:
             PlannerException(
                 e,
