@@ -14,7 +14,7 @@ from app.utils import log, ReasoningException
 class ReasoningService(reasoning_pb2_grpc.ReasoningServicer):
     def HandlePlannerRequestToReasoning(self, request, context):
         try:
-            log.info("Handle Planner Request ToReasoning")
+            log.info("Handle Planner Request To Reasoning")
             response = reasoning_response_to_planner(request)
             return response
         except Exception as e:

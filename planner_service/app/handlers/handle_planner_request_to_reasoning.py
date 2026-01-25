@@ -9,10 +9,12 @@ import generated.v4.python.reasoning_pb2_grpc as reasoning_pb2_grpc
 
 from app.graph import build_graph
 
-from app.utils import log, PlannerException
+from app.utils import log, load_config, PlannerException
 
 
 def planner_request_to_reasoning(incoming_request_gateway):
+    host = load_config("server", "host")
+
     channel = grpc.insecure_channel("localhost:50052")
     stub = reasoning_pb2_grpc.ReasoningStub(channel=channel)
 
@@ -34,6 +36,7 @@ def reason_request(request_id: str, user_prompt:str):
     try:
         app = build_graph()
         result = app.invoke(payload)
+        log.info("Invoking payload.")
         output = {
             "request_id": result["request_id"],
             "user_prompt": result["user_prompt"],
