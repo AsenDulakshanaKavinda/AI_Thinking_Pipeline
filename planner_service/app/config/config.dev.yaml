@@ -1,0 +1,27 @@
+app:
+  name: "planner-service"
+  description: "Planner service for AI Thinking Pipeline"
+  version: "1.0.0"
+  environment: "development"
+
+server:
+  protocol: "grpc"
+  host: "localhost:50051"
+  max_workers: 10
+
+logging:
+  level: "INFO"
+  format: "json"
+  enable_console: true
+  enable_file: true
+  file_path: "logs/planner.log"
+
+prompt:
+  planner_prompt_filepath: "app/prompts/planner_prompt.txt"
+  intent_prompt_filepath: "app/prompts/intent_prompt.txt"
+
+model:
+  model_name: "mistral-small-latest"
+  key: "MISTRAL_API_KEY"
+  temperature: 0.2
+

@@ -21,7 +21,7 @@ except Exception as e:
         }
     )
     
-# - LLM intent
+# - LLM intent - have a structures output
 try:
     llm_intent = llm.with_structured_output(IntentResult)
     log.info("LLM intent model loaded.")
@@ -33,7 +33,7 @@ except Exception as e:
         }
     )
     
-# - LLM planner
+# - LLM planner - have a structures output
 try:
     llm_planner = llm.with_structured_output(PlannerResult)
     log.info("LLM planner model loaded.")

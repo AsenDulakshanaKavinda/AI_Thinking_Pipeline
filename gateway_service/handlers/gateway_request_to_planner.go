@@ -5,7 +5,8 @@ import (
 	"time"
 
 
-	pb "github.com/ai-thinking-pipeline/generated/v3/go"
+	// pb "github.com/ai-thinking-pipeline/generated/v3/go"
+	pb "github.com/ai-thinking-pipeline/generated/v4/go"
 	zlog "github.com/ai-thinking-pipeline/utils/zlog"
 
 	"google.golang.org/grpc"

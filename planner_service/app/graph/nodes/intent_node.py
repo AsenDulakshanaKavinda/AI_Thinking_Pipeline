@@ -7,6 +7,7 @@ from .node_helper import load_prompt
 
 
 def intent_node(state: PlannerState) -> PlannerState:
+    """ intent node that read user prompt and decide the intent of the prompt, add intent and confidence to the state """
     try:
         log.info(f"Detecting intent for the request: {state['request_id']}")
         intent_prompt = load_prompt(filepath="app/prompts/intent_prompt.txt")

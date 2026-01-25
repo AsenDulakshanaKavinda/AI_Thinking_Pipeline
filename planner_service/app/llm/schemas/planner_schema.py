@@ -1,7 +1,7 @@
 from typing import List, Dict, Optional
 from pydantic import BaseModel, Field
 
-
+# planner node schema
 class PlanStep(BaseModel):
     step_id: int = Field(..., description="Execution order")
     action: str = Field(..., description="What to do")
