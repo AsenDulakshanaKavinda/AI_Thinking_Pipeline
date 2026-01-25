@@ -82,17 +82,5 @@ def create_planner_server():
     server.wait_for_termination()
 
 
-if __name__ == "__main__":
 
-    try:
-        create_planner_server()
-    except Exception as e:
-        PlannerException(
-            e, 
-            context={
-                "operation": "Planner server", "message": "Error"
-            }
-        )
-    except KeyboardInterrupt:
-        log.info("[Planner Server] - Shutdown.")
 

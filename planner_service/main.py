@@ -7,7 +7,7 @@ def main():
 if __name__ == "__main__":
 
     try:
-        main()
+        create_planner_server()
     except Exception as e:
         PlannerException(
             e, 
@@ -17,4 +17,3 @@ if __name__ == "__main__":
         )
     except KeyboardInterrupt:
         log.info("[Planner Server] - Shutdown.")
-

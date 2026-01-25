@@ -38,18 +38,4 @@ def create_reasoning_server():
     log.info("Reasoning server running on [Port - 50052]")
     server.wait_for_termination()
 
-if __name__ == "__main__":
-    try:
-        create_reasoning_server()
-    except Exception as e:
-        ReasoningException(
-            e, 
-            context={
-                "operation": "Reasoning server", "message": "Error"
-            }
-        )
-    except KeyboardInterrupt:
-        log.info("[Reasoning Server] - Shutdown.")
-
-
 

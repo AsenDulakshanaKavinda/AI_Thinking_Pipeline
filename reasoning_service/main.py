@@ -1,6 +1,24 @@
+from app.server import create_reasoning_server
+
+from app.utils import log, ReasoningException
+
+
 def main():
-    print("Hello from reasoning-service!")
+    create_reasoning_server()
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        create_reasoning_server()
+    except Exception as e:
+        ReasoningException(
+            e, 
+            context={
+                "operation": "Reasoning server", "message": "Error"
+            }
+        )
+    except KeyboardInterrupt:
+        log.info("[Reasoning Server] - Shutdown.")
+
+
+
