@@ -3,7 +3,8 @@
 import grpc
 import warnings
 
-import reasoning_pb2 as reasoning__pb2
+import generated.v4.python.reasoning_pb2 as reasoning__pb2
+
 
 GRPC_GENERATED_VERSION = '1.76.0'
 GRPC_VERSION = grpc.__version__

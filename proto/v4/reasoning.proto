@@ -22,3 +22,4 @@ message ReasoningResponseToPlanner {
 service Reasoning {
   rpc HandlePlannerRequestToReasoning(PlannerRequestToReasoning) returns (ReasoningResponseToPlanner);
 }
+

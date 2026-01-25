@@ -5,7 +5,7 @@ from concurrent import futures
 import generated.v4.python.planner_pb2 as planner_pb2
 import generated.v4.python.planner_pb2_grpc as planner_pb2_grpc
 
-from .handlers import (
+from app.handlers import (
     planner_response_to_gateway,
     planner_request_to_reasoning
     
@@ -19,6 +19,7 @@ class PlannerService(planner_pb2_grpc.PlannerServicer):
         try:
             log.info("Handle planner response to gateway")
             response_from_planner = planner_response_to_gateway(request)
+            planner_request_to_reasoning(request)
             return response_from_planner
         except Exception as e:
             PlannerException(
@@ -29,7 +30,7 @@ class PlannerService(planner_pb2_grpc.PlannerServicer):
             )
 
 
-"""     def HandlePlannerRequestToReasoning(self, request, context):
+    def HandlePlannerRequestToReasoning(self, request, context):
         try:
             log.info("Handle planner request to reasoning")
             return planner_request_to_reasoning(request)
@@ -39,7 +40,7 @@ class PlannerService(planner_pb2_grpc.PlannerServicer):
                 context={
                     "operation": "HandlePlannerRequestToReasoning"
                 }
-            ) """
+            )
     
 def create_planner_server():
     server = grpc.server(

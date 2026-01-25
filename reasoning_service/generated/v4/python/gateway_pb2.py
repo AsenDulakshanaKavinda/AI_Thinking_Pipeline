@@ -22,7 +22,7 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-import common_pb2 as common__pb2
+import generated.v4.python.common_pb2 as common__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rgateway.proto\x12\ngateway.v4\x1a\x0c\x63ommon.proto\"S\n\x16\x43lientRequestToGateway\x12$\n\x04meta\x18\x01 \x01(\x0b\x32\x16.common.v4.RequestMeta\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\"@\n\x17GatewayResponseToClient\x12%\n\x08response\x18\x01 \x01(\x0b\x32\x13.common.v4.Response2r\n\x07Gateway\x12g\n\x1cHandleClientRequestToGateway\x12\".gateway.v4.ClientRequestToGateway\x1a#.gateway.v4.GatewayResponseToClientB\x06Z\x04.;pbb\x06proto3')

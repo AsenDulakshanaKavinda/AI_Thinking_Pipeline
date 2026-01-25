@@ -45,7 +45,7 @@ func ClientRequestToGatewayFn() {
 					UnixMs: time.Now().UnixMilli(),
 				},
 			},
-			UserPrompt: "Hello from Go",
+			UserPrompt: "AI Agent for weather prediction.",
 		},
 	)
 	zlog.Info("Creating client Request to Gateway")

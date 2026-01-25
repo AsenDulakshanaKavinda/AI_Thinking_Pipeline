@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import gateway_pb2 as gateway__pb2
+import generated.v4.python.gateway_pb2 as gateway__pb2
 
 GRPC_GENERATED_VERSION = '1.76.0'
 GRPC_VERSION = grpc.__version__

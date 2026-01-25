@@ -22,7 +22,7 @@ _runtime_version.ValidateProtobufRuntimeVersion(
 _sym_db = _symbol_database.Default()
 
 
-import common_pb2 as common__pb2
+import generated.v4.python.common_pb2 as common__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0freasoning.proto\x12\x0creasoning.v4\x1a\x0c\x63ommon.proto\"\x87\x01\n\x19PlannerRequestToReasoning\x12\x12\n\nrequest_id\x18\x01 \x01(\t\x12\x13\n\x0buser_prompt\x18\x02 \x01(\t\x12\x0e\n\x06intent\x18\x03 \x01(\t\x12\x12\n\nconfidence\x18\x04 \x01(\x02\x12\x1d\n\x04plan\x18\x05 \x01(\x0b\x32\x0f.common.v4.Plan\"C\n\x1aReasoningResponseToPlanner\x12%\n\x08response\x18\x01 \x01(\x0b\x32\x13.common.v4.Response2\x81\x01\n\tReasoning\x12t\n\x1fHandlePlannerRequestToReasoning\x12\'.reasoning.v4.PlannerRequestToReasoning\x1a(.reasoning.v4.ReasoningResponseToPlannerB\x06Z\x04.;pbb\x06proto3')
