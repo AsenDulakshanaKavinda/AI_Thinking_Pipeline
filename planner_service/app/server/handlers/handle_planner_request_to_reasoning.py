@@ -9,18 +9,20 @@ from app.graph import build_graph
 
 from app.utils import log, PlannerException
 
-def planner_request_to_reasoning(incoming_request_gateway):
-    channel = grpc.insecure_channel("localhost: 50052")
-    stud = reasoning_pb2_grpc.ReasoningStub(channel=channel)
-
-
 
 def planner_request_to_reasoning(incoming_request_gateway):
     channel = grpc.insecure_channel("localhost: 50052")
-    stdu = pb2_grpc.PlannerStub(channel=channel)
+    stdu = reasoning_pb2_grpc.ReasoningStub(channel=channel)
 
     request_id, user_prompt = verify_incoming_request(incoming_request_gateway)
 
+    reasoning_request = reason_request(request_id=request_id, user_prompt=user_prompt)
+
+    return stdu.HandlePlannerRequestToReasoning(reasoning_request)
+
+
+def reason_request(request_id: str, user_prompt:str):
+    log.into("Starting to reasaon the request -------------")
     payload = {
         "request_id": request_id,
         "user_prompt": user_prompt
@@ -35,7 +37,12 @@ def planner_request_to_reasoning(incoming_request_gateway):
             "intent": result["intent"],
             "confidence": result["confidence"],
             "plan": result["plan"].model_dump()  
+
         }
+        print("---------output---------")
+        print(output)
+        print("---------output---------")
+        return output
     except Exception as e:
         PlannerException(
             e,
@@ -45,15 +52,6 @@ def planner_request_to_reasoning(incoming_request_gateway):
             }
         )
 
-    reasoning_request =  pb2.PlannerRequestToReasoning(
-        request_id = output.get("request_id"),
-        user_prompt = output.get("user_prompt"),
-        intent = output.get("intent"),
-        confidence = output("confidence"),
-        plan = output("plan"),
-    )
-
-    return stdu.HandlePlannerRequestToReasoning(reasoning_request)
 
 def verify_incoming_request(incoming_request):
     if not incoming_request:

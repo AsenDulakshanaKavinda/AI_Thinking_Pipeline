@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package reasoning.v4;
+
+import "common.proto";
+
+option go_package = ".;pb";
+
+
+message PlannerRequestToReasoning {
+  string request_id = 1;
+  string user_prompt = 2;
+  string intent = 3;
+  float confidence = 4;
+  common.v4.Plan plan = 5;  // Use Plan message from planner
+}
+
+message ReasoningResponseToPlanner {
+  common.v4.Response response = 1;
+}
+
+service Reasoning {
+  rpc HandlePlannerRequestToReasoning(PlannerRequestToReasoning) returns (ReasoningResponseToPlanner);
+}

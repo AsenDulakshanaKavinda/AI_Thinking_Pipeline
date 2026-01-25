@@ -20,7 +20,8 @@ import (
 	"net"
 
 	zlog "github.com/ai-thinking-pipeline/utils/zlog"
-	pb "github.com/ai-thinking-pipeline/generated/v3/go"
+	// pb "github.com/ai-thinking-pipeline/generated/v3/go"
+	pb "github.com/ai-thinking-pipeline/generated/v4/go"
 	"github.com/ai-thinking-pipeline/handlers"	
 	"google.golang.org/grpc"
 )
