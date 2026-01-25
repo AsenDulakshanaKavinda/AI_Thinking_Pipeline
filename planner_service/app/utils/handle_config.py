@@ -9,6 +9,7 @@ CONFIG_FILE_PATH= os.getenv("CONFIG_FILE_PATH")
 
 @lru_cache
 def load_config_file(filepath: Path) -> dict:
+    """ Load configuration file"""
     try:
         with open(filepath, 'r') as file:
             config_data = yaml.safe_load(file)
@@ -22,7 +23,7 @@ def load_config_file(filepath: Path) -> dict:
 
 
 def load_config(*keys, default=None):
-
+    """ Load configuration """
     config = load_config_file(filepath=CONFIG_FILE_PATH)
     value = config
 
@@ -34,6 +35,6 @@ def load_config(*keys, default=None):
         value = value[key]  
     return value      
 
-print(load_config("model", "key"))
+
 
 

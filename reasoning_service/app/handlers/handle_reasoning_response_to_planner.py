@@ -8,6 +8,7 @@ import generated.v4.python.reasoning_pb2_grpc as reasoning_pb2_grpc
 from app.utils import log, ReasoningException
 
 def reasoning_response_to_planner(incoming_request):
+    """"Send a response to the Planner after receiving a request"""
 
     request_id, _ = verify_incoming_request(incoming_request=incoming_request)
 

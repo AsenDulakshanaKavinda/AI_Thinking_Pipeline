@@ -13,7 +13,7 @@ from app.utils import log, load_config, PlannerException
 
 
 def planner_request_to_reasoning(incoming_request_gateway):
-    host = load_config("server", "host")
+    """ Send reasoning request to reasoning service  """
 
     channel = grpc.insecure_channel("localhost:50052")
     stub = reasoning_pb2_grpc.ReasoningStub(channel=channel)
@@ -28,6 +28,7 @@ def planner_request_to_reasoning(incoming_request_gateway):
 
 
 def reason_request(request_id: str, user_prompt:str):
+    """ invoke the request data to langgraph """
     payload = {
         "request_id": request_id,
         "user_prompt": user_prompt
@@ -88,6 +89,7 @@ def verify_incoming_request(incoming_request):
 
 
 def create_reasoning_request(request_id, user_prompt, plan_result):
+    """ Create structured request to reasoning """
     proto_plan = common_pb2.Plan(
         goal=plan_result["plan"]["goal"]
     )

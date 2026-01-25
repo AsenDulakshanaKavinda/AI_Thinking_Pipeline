@@ -5,6 +5,7 @@ from .nodes import intent_node, planner_node
 from app.utils import log, PlannerException
 
 def build_graph():
+    """ Build the graph """
     try:
         graph = StateGraph(PlannerState)
 

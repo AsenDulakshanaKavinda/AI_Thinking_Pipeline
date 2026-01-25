@@ -1,7 +1,6 @@
 
 from datetime import datetime
 
-
 import generated.v4.python.common_pb2 as common_pb2
 import generated.v4.python.common_pb2_grpc as common_pb2_grpc
 
